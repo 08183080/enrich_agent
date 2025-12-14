@@ -1,0 +1,206 @@
+app:
+  description: 种子丰富智能体v1.0
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: 种子丰富智能体v1.0
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openai_api_compatible:0.0.27@f9ce3ff5e28f09931a3a7fca59add2d09590408f7e9a3d701b10c77a60249719
+    version: null
+kind: app
+version: 0.5.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_batch_limit: 10
+        image_file_size_limit: 10
+        single_chunk_attachment_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: llm
+      id: 1765718880226-source-1765718881839-target
+      source: '1765718880226'
+      sourceHandle: source
+      target: '1765718881839'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: end
+      id: 1765718881839-source-1765719332629-target
+      source: '1765718881839'
+      sourceHandle: source
+      target: '1765719332629'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: false
+        title: 用户输入
+        type: start
+        variables:
+        - default: ''
+          hint: ''
+          label: 协议
+          max_length: 48
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: protocol
+        - default: ''
+          hint: ''
+          label: 协议实现
+          max_length: 200
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: protocol_inplem
+        - default: ''
+          hint: ''
+          label: seed
+          max_length: 1000
+          options: []
+          placeholder: ''
+          required: true
+          type: paragraph
+          variable: seed
+      height: 161
+      id: '1765718880226'
+      position:
+        x: -13.348864498487899
+        y: 266.8036732211764
+      positionAbsolute:
+        x: -13.348864498487899
+        y: 266.8036732211764
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.3
+          mode: chat
+          name: DeepSeek-V3.2
+          provider: langgenius/openai_api_compatible/openai_api_compatible
+        prompt_template:
+        - id: 97f37a3b-5e7e-4a57-b22e-d7e2f7a8830c
+          role: system
+          text: '你是网络协议模糊测试专家。
+
+
+            输入：{{#1765718880226.protocol#}}的{{#1765718880226.protocol_inplem#}}实现的协议序列的初始种子{{#1765718880226.seed#}}。
+
+
+            处理逻辑：请你根据该协议的RFC和该协议实现的特点，对初始种子进行丰富。补充至少2条缺失的消息类型，同时补充的位置要符合协议的状态机，构造合理有效的消息序列。
+
+
+            输出：只输出丰富后的消息序列。不需要额外的任何修饰。换行符也不需要展示。'
+        - id: 90b3e8b5-f4b9-41bd-8e6d-4dbdcef403ff
+          role: user
+          text: 完全按照系统提示词来。
+        selected: false
+        title: LLM
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1765718881839'
+      position:
+        x: 425.08757811831856
+        y: 272.2725956386558
+      positionAbsolute:
+        x: 425.08757811831856
+        y: 272.2725956386558
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        outputs:
+        - value_selector:
+          - '1765718881839'
+          - text
+          value_type: string
+          variable: text
+        selected: false
+        title: 输出
+        type: end
+      height: 88
+      id: '1765719332629'
+      position:
+        x: 814.040934795686
+        y: 272.2725956386558
+      positionAbsolute:
+        x: 814.040934795686
+        y: 272.2725956386558
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    viewport:
+      x: 189.9199936251057
+      y: 85.19818197424746
+      zoom: 1.1486983792956502
+  rag_pipeline_variables: []
